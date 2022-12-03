@@ -17,7 +17,7 @@ export class <%= classify(name) %>GraphQlQueryHandlerService
       typeof request === 'object' &&
       request !== null &&
       (request as Partial<<%= classify(name) %>QueryRequest>).requestType ===
-        <%= symbolify(name) %>_GQL_QUERY_REQUEST
+        <%= uniqueSymbol %>_GQL_QUERY_REQUEST
     );
   }
 
@@ -34,12 +34,12 @@ export class <%= classify(name) %>GraphQlQueryHandlerService
   }
 }
 
-export const <%= symbolify(name) %>_GQL_QUERY_REQUEST = Symbol(
-  '<%= description(name) %>'
+export const <%= uniqueSymbol %>_GQL_QUERY_REQUEST = Symbol(
+  '<%= description %>'
 );
 
 export interface <%= classify(name) %>QueryRequest {
-  requestType: typeof <%= symbolify(name) %>_GQL_QUERY_REQUEST;
+  requestType: typeof <%= uniqueSymbol %>_GQL_QUERY_REQUEST;
 }
 
 export interface <%= classify(name) %>QueryResponse {}

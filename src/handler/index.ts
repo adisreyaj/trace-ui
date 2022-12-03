@@ -1,5 +1,4 @@
 import { normalize, workspaces } from '@angular-devkit/core';
-import { dasherize, underscore } from '@angular-devkit/core/src/utils/strings';
 import {
   apply,
   applyTemplates,
@@ -13,8 +12,8 @@ import {
   Tree,
   url,
 } from '@angular-devkit/schematics';
-import { capitalize, replaceAll, upperCase } from 'voca';
 import { ProjectName, Schema } from './schema';
+import { createDescriptionFromName, symbolify } from './utils/helper.util';
 import { createHost } from './utils/host.util';
 import { getPath } from './utils/path.util';
 
@@ -42,8 +41,8 @@ export default function (options: Schema): Rule {
         classify: strings.classify,
         dasherize: strings.dasherize,
         name: options.name,
-        uniqueSymbol: upperCase(underscore(options.name)),
-        description: replaceAll(capitalize(dasherize(options.name)), '-', ' '),
+        symbolify: symbolify,
+        description: createDescriptionFromName,
       }),
       move(normalize(handlerLocation)),
     ]);
