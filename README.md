@@ -1,28 +1,19 @@
-# Getting Started With Schematics
+## Trace UI Schematics Collection
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+### Handlers
 
-### Testing
+Create a new handler with the following command:
 
-To test locally, install `@angular-devkit/schematics-cli` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
-
-Check the documentation with
-
-```bash
-schematics --help
+```sh
+handler --name <name-in-this-format> --type query --project app --path <path>
 ```
 
-### Unit Testing
+Supported types:
 
-`npm run test` will run the unit tests, using Jasmine as a runner and test framework.
+- query
+- mutation
 
-### Publishing
+Supported projects:
 
-To publish, simply do:
-
-```bash
-npm run build
-npm publish
-```
-
-That's it!
+- app
+- security
