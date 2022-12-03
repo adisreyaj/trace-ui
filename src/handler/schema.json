@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Trace Handler Configuration",
+  "type": "object",
+  "description": "Configuration for the trace handler",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "x-prompt": "What name should we give to the handler?"
+    },
+    "type": {
+      "description": "What kind of handler do you want?",
+      "type": "string",
+      "default": "query",
+      "enum": [
+        "query",
+        "mutation"
+      ],
+      "x-prompt": "What kind of handler do you want create?"
+    },
+    "project": {
+      "type": "string",
+      "default": "app",
+      "enum": [
+        "app",
+        "security"
+      ],
+      "x-prompt": "Which project do you want the handler to be part of?"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "x-prompt": "Relative path to selected project where the handler should be created?"
+    }
+  }
+}

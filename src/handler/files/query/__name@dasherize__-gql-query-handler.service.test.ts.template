@@ -1,0 +1,37 @@
+import { createServiceFactory } from '@ngneat/spectator/jest';
+import {
+  <%= classify(name) %>GraphQlQueryHandlerService,
+  <%= uniqueSymbol %>_GQL_QUERY_REQUEST,
+  <%= classify(name) %>QueryRequest,
+  <%= classify(name) %>QueryResponse
+} from './<%= dasherize(name) %>-gql-query-handler.service';
+
+describe('<%= classify(name) %>GraphQlQueryHandlerService', () => {
+  const createService = createServiceFactory({
+    service: <%= classify(name) %>GraphQlQueryHandlerService
+  });
+
+  const buildRequest = (): <%= classify(name) %>QueryRequest => ({
+    requestType: <%= uniqueSymbol %>_GQL_QUERY_REQUEST
+  });
+
+  const mockResponse: <%= classify(name) %>QueryResponse = {
+  };
+
+  test('should match request correctly', () => {
+    const spectator = createService();
+    expect(spectator.service.matchesRequest(buildRequest())).toBe(true);
+    expect(spectator.service.matchesRequest({ requestType: 'other' })).toBe(false);
+  });
+
+  test('should produce expected graphql', () => {
+    const spectator = createService();
+    const requestSelection = spectator.service.convertRequest();
+    expect(requestSelection).toEqual({});
+  });
+
+  test('should convert response correctly', () => {
+    const spectator = createService();
+    expect(spectator.service.convertResponse(mockResponse)).toMatchObject({});
+  });
+});

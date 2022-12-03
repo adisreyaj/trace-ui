@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "handler": {
+      "description": "Create GQL Handler",
+      "factory": "./handler",
+      "schema": "./handler/schema.json"
+    }
+  }
+}

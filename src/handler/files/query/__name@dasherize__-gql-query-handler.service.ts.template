@@ -1,0 +1,48 @@
+import { Injectable } from '@angular/core';
+import { assertUnreachable } from '@hypertrace/common';
+import {
+  GraphQlArgumentValue,
+  GraphQlHandlerType,
+  GraphQlQueryHandler,
+  GraphQlSelection
+} from '@hypertrace/graphql-client';
+
+@Injectable({ providedIn: 'root' })
+export class <%= classify(name) %>GraphQlQueryHandlerService
+  implements GraphQlQueryHandler<<%= classify(name) %>QueryRequest, <%= classify(name) %>QueryResponse> {
+  public readonly type: GraphQlHandlerType.Query = GraphQlHandlerType.Query;
+
+  public matchesRequest(request: unknown): request is <%= classify(name) %>QueryRequest {
+    return (
+      typeof request === 'object' &&
+      request !== null &&
+      (request as Partial<<%= classify(name) %>QueryRequest>).requestType ===
+        <%= uniqueSymbol %>_GQL_QUERY_REQUEST
+    );
+  }
+
+  public convertRequest(request: <%= classify(name) %>QueryRequest): GraphQlSelection {
+    return {
+      path: '',
+      arguments: [],
+      children: []
+    };
+  }
+
+  public convertResponse(response: <%= classify(name) %>ServerResponse): <%= classify(name) %>QueryResponse {
+    return response;
+  }
+}
+
+export const <%= uniqueSymbol %>_GQL_QUERY_REQUEST = Symbol(
+  '<%= description %>'
+);
+
+export interface <%= classify(name) %>QueryRequest {
+  requestType: typeof <%= uniqueSymbol %>_GQL_QUERY_REQUEST;
+}
+
+export interface <%= classify(name) %>QueryResponse {}
+
+// TODO: Add server response type
+interface <%= classify(name) %>ServerResponse {}
